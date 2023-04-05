@@ -11,7 +11,7 @@ import Checkbox from "expo-checkbox";
 import Button from "../../components/Button/Button";
 import { useAuth } from "../../hooks/AuthContext";
 
-const SignIn = () => {
+const SignUp = () => {
   const router = useRouter();
   const [isSelected, setIsSelected] = useState(false);
 
@@ -29,7 +29,7 @@ const SignIn = () => {
     console.log(data);
 
     setUser({
-      name: "User Tester",
+      name: data?.name,
       email: data?.email,
     });
     router.push("/");
@@ -45,13 +45,23 @@ const SignIn = () => {
       <Stack.Screen options={{ headerShown: false }} />
 
       <View style={styles.container}>
-        <Text style={styles.authHeaderText}>Welcome Back</Text>
+        <Text style={styles.authHeaderText}>Create an Account</Text>
         <Text style={styles.authParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor
         </Text>
 
         <View style={styles.formContainer}>
+          <Input
+            label="fullname"
+            name="name"
+            control={control}
+            rules={{
+              required: "Full name is required!",
+            }}
+            errors={errors}
+          />
+
           <Input
             label="email"
             name="email"
@@ -81,48 +91,7 @@ const SignIn = () => {
               alignItems: "center",
               marginTop: 10,
             }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 15,
-              }}
-            >
-              <Checkbox
-                value={isSelected}
-                onValueChange={setIsSelected}
-                color={isSelected ? COLORS.orange : undefined}
-                style={{
-                  height: 20,
-                  width: 20,
-                  borderWidth: 0,
-                  backgroundColor: "#E6E1FF",
-                }}
-              />
-              <Text
-                style={{
-                  color: COLORS.greyText,
-                  fontFamily: FONT.regular,
-                  fontSize: SIZES.font12,
-                }}
-              >
-                Remember me
-              </Text>
-            </View>
-
-            <Link
-              href="/forgot-password"
-              style={{
-                color: COLORS.normalTextBlueColor,
-                fontFamily: FONT.regular,
-                fontSize: SIZES.font12,
-              }}
-            >
-              {" "}
-              Forgot Password ?
-            </Link>
-          </View>
+          ></View>
         </View>
         <View
           style={{
@@ -141,7 +110,7 @@ const SignIn = () => {
                   fontSize: SIZES.font14,
                 }}
               >
-                Login
+                Sign up
               </Text>
             }
             color={COLORS.deepBlue}
@@ -161,14 +130,14 @@ const SignIn = () => {
               color: COLORS.paragraphTextColor,
             }}
           >
-            You don't have an account yet?{" "}
+            Already have an account?{" "}
             <Link
-              href="/sign-up"
+              href="/sign-in"
               style={{
                 color: COLORS.orange,
               }}
             >
-              Sign up
+              Sign in
             </Link>
           </Text>
         </View>
@@ -176,4 +145,4 @@ const SignIn = () => {
     </KeyboardAwareScrollView>
   );
 };
-export default SignIn;
+export default SignUp;
