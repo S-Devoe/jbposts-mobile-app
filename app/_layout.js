@@ -24,7 +24,12 @@ const Layout = () => {
 
   return (
     <AuthProvider>
-      <Stack onLayout={onLayoutRootView}  />
+      <Stack
+        onLayout={onLayoutRootView}
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
     </AuthProvider>
   );
 };

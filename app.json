@@ -4,6 +4,11 @@
     "web": {
       "bundler": "metro"
     },
+    "ios": {
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
     "name": "jobpost-app",
     "slug": "jobpost-app"
   }

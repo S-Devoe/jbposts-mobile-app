@@ -9,13 +9,14 @@ import { COLORS, FONT, SIZES } from "../../styles/theme";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 import Button from "../../components/Button/Button";
+import * as SecureStore from "expo-secure-store";
 import { useAuth } from "../../hooks/AuthContext";
 
 const SignIn = () => {
   const router = useRouter();
   const [isSelected, setIsSelected] = useState(false);
 
-  const { user, setUser } = useAuth();
+  const {  setUser } = useAuth();
 
   const {
     control,
@@ -25,8 +26,9 @@ const SignIn = () => {
 
   const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    await SecureStore.setItemAsync("token", "A12b4");
 
     setUser({
       name: "User Tester",
