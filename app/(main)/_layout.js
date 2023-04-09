@@ -1,4 +1,4 @@
-import { Slot, Stack, Tabs } from "expo-router";
+import {  Tabs } from "expo-router";
 import { View, Text } from "react-native";
 import HomeIcon from "../../components/Icons/HomeIcon";
 import ConnectIcon from "../../components/Icons/ConnectIcon";
@@ -16,12 +16,14 @@ const Layout = () => {
           tabBarInactiveTintColor: "#A49EB5",
           headerShown: false,
           tabBarShowLabel: false,
+          
           tabBarStyle: {
             height: 80,
+            backgroundColor: COLORS.white,
           },
         }}
         sceneContainerStyle={{
-          backgroundColor: "#F9F9F9",
+          backgroundColor: COLORS.offwhite,
         }}
       >
         <Tabs.Screen

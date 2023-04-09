@@ -45,7 +45,7 @@ const SignUp = () => {
     >
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.container}>
+      <View style={styles.container(false)}>
         <Text style={styles.authHeaderText}>Create an Account</Text>
         <Text style={styles.authParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

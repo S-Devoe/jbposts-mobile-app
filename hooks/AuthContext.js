@@ -4,8 +4,9 @@ import * as SecureStore from "expo-secure-store";
 
 const AuthContext = createContext(null);
 
-async function getValueFor(key) {
+export async function getValueFor(key) {
   let result = await SecureStore.getItemAsync(key);
+
   return result;
 }
 
@@ -13,20 +14,25 @@ const useProtectedRoute = (user, token) => {
   const segments = useSegments();
   const router = useRouter();
 
-  // console.log("segments:", segments);
+  console.log("segments:", segments);
   // console.log("router:", router);
 
   const inAuthGroup = segments[0] === "(auth)";
 
+  console.log(inAuthGroup);
+
   useEffect(() => {
+    console.log(token, user);
+    // !token && router.push("/onboarding");
     if (!user && !inAuthGroup && !token) {
       // Redirect to the sign-in page.
-      router.replace("/onboarding");
-    } else if (user && inAuthGroup && token) {
+      router.push("/onboarding");
+    }
+    else if (token && inAuthGroup && user) {
       // Redirect away from the sign-in page.
       router.replace("/");
     }
-  }, [user, inAuthGroup]);
+  }, [user, segments]);
 };
 
 export function AuthProvider({ children }) {

@@ -1,6 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack, Slot } from "expo-router";
 import { View, Text } from "react-native";
-import { AuthProvider } from "../hooks/AuthContext";
+import { AuthProvider, useAuth } from "../hooks/AuthContext";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from "react";
@@ -23,14 +23,34 @@ const Layout = () => {
   if (!fontsLoaded) return null;
 
   return (
-    <AuthProvider>
-      <Stack
-        onLayout={onLayoutRootView}
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-    </AuthProvider>
+    <>
+      {!fontsLoaded && <SplashScreen />}
+      {fontsLoaded && <RootLayoutNav onLayoutRootView={onLayoutRootView} />}
+    </>
   );
 };
 export default Layout;
+
+function RootLayoutNav(onLayoutRootView) {
+  return (
+    <>
+      <AuthProvider>
+        <Stack
+          onLayout={onLayoutRootView}
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </AuthProvider>
+    </>
+  );
+}
+
+export const unstable_settings = {
+  // Used for `(auth)`
+  initialRouteName: "onboarding",
+  // Used for `(main)`
+  main: {
+    initialRouteName: "index",
+  },
+};

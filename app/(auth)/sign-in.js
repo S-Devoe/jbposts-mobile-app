@@ -16,7 +16,7 @@ const SignIn = () => {
   const router = useRouter();
   const [isSelected, setIsSelected] = useState(false);
 
-  const {  setUser } = useAuth();
+  const { setUser } = useAuth();
 
   const {
     control,
@@ -34,7 +34,7 @@ const SignIn = () => {
       name: "User Tester",
       email: data?.email,
     });
-    router.push("/");
+    // router.replace("/"); #NOTE: the routing to the home page is being handled in the AuthContext
   };
 
   return (
@@ -46,7 +46,7 @@ const SignIn = () => {
     >
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.container}>
+      <View style={styles.container(false)}>
         <Text style={styles.authHeaderText}>Welcome Back</Text>
         <Text style={styles.authParagraph}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

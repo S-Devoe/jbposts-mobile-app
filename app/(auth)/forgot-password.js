@@ -36,7 +36,7 @@ const ForgotPassword = () => {
     >
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.container}>
+      <View style={styles.container(false)}>
         <Text style={styles.authHeaderText}>Forgot Password?</Text>
         <Text style={styles.authParagraph}>
           To reset your password, you need your email or mobile number that can

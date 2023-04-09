@@ -18,7 +18,7 @@ const EmailSent = () => {
     >
       <Stack.Screen options={{ headerShown: false }} />
 
-      <View style={styles.container}>
+      <View style={styles.container(false)}>
         <Text style={styles.authHeaderText}>Check Your Email</Text>
         <Text style={styles.authParagraph}>
           We have sent the reset password to the email address

@@ -6,6 +6,7 @@ const COLORS = {
   orange: "#FF9228",
   white: "#FFFFFF",
   black: "#000",
+  offwhite: "#f9f9f9",
 
   boldTextBlueColor: "#150B3D",
   normalTextBlueColor: "#0D0140",

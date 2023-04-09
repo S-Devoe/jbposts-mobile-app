@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 import { COLORS, FONT, SIZES } from "./theme";
 
 const styles = StyleSheet.create({
-  container: {
+  container: (isMain) => ({
     width: "100%",
-    height: "100%",
-    backgroundColor: COLORS.white,
+
+    backgroundColor: isMain ? COLORS.offwhite : COLORS.white,
     paddingHorizontal: 20,
-  },
+  }),
 
   appName: {
     fontFamily: FONT.bold,

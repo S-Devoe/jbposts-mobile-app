@@ -26,7 +26,7 @@ const Onboarding = () => {
           headerShown: false,
         }}
       />
-      <View style={styles.container}>
+      <View style={styles.container(false)}>
         <Text style={styles.appName}>Jobspot</Text>
         <View
           style={{
