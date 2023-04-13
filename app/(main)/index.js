@@ -7,21 +7,25 @@ import * as SecureStore from "expo-secure-store";
 import { useRouter } from "expo-router";
 import JoinNowCard from "../../components/home/JoinNow/JoinNowCard";
 import FindJob from "../../components/home/FindJob/FindJob";
-import * as data from "../../data/index.json";
+import data from "../../data";
 import HomeCard from "../../components/cards/HomeCard";
-import { Dimensions } from "react-native";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/DetailsSlice.js";
 
 const Home = () => {
-  const { signOut } = useAuth();
+  // const { signOut } = useAuth();
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
-    signOut();
-    await SecureStore.deleteItemAsync("token");
-    router.replace("/onboarding");
+    dispatch(setUser(null));
+    SecureStore.deleteItemAsync("token")
+      .then(router.replace("/onboarding"))
+      .catch((error) => console.log("Could not delete user info ", error));
   };
-  const screenHeight = Dimensions.get("window").height;
-  console.log(screenHeight);
+
+  console.log(data);
+
 
   return (
     <SafeAreaView
@@ -76,14 +80,15 @@ const Home = () => {
                 gap: 15,
               }}
             >
-              {data?.data?.map((item, index) => (
-                <>
-                  <HomeCard item={item} key={index} />
-                </>
+              {data?.map((item, index) => (
+                <HomeCard key={index} item={item} />
               ))}
             </View>
           </View>
         </View>
+        <TouchableOpacity onPress={handleLogout}>
+          <Text>Log Out</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

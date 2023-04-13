@@ -1,9 +1,10 @@
+import { SafeAreaView } from 'react-native'
 import { View, Text } from 'react-native'
 const Chat = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Chat</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 export default Chat

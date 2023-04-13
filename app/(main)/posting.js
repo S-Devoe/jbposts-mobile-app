@@ -1,9 +1,10 @@
+import { SafeAreaView } from 'react-native'
 import { View, Text } from 'react-native'
 const Posting = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Posting</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 export default Posting

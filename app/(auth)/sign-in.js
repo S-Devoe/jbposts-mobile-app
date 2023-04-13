@@ -11,12 +11,15 @@ import Checkbox from "expo-checkbox";
 import Button from "../../components/Button/Button";
 import * as SecureStore from "expo-secure-store";
 import { useAuth } from "../../hooks/AuthContext";
+import { setUser } from "../../redux/DetailsSlice.js";
+import { useDispatch } from "react-redux";
 
 const SignIn = () => {
   const router = useRouter();
   const [isSelected, setIsSelected] = useState(false);
+  const dispatch = useDispatch();
 
-  const { setUser } = useAuth();
+  // const { setUser } = useAuth();
 
   const {
     control,
@@ -27,13 +30,12 @@ const SignIn = () => {
   const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
   const onSubmit = async (data) => {
-    console.log(data);
     await SecureStore.setItemAsync("token", "A12b4");
-
-    setUser({
-      name: "User Tester",
-      email: data?.email,
-    });
+    dispatch(setUser({ name: "User Tester", email: data?.email }));
+    // setUser({
+    //   name: "User Tester",
+    //   email: data?.email,
+    // });
     // router.replace("/"); #NOTE: the routing to the home page is being handled in the AuthContext
   };
 

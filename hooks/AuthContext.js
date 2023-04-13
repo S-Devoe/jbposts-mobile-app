@@ -1,6 +1,8 @@
 import { useRouter, useSegments } from "expo-router";
 import { createContext, useContext, useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/DetailsSlice.js";
 
 const AuthContext = createContext(null);
 
@@ -14,21 +16,16 @@ const useProtectedRoute = (user, token) => {
   const segments = useSegments();
   const router = useRouter();
 
-  console.log("segments:", segments);
-  // console.log("router:", router);
-
   const inAuthGroup = segments[0] === "(auth)";
 
   console.log(inAuthGroup);
 
   useEffect(() => {
-    console.log(token, user);
     // !token && router.push("/onboarding");
     if (!user && !inAuthGroup && !token) {
       // Redirect to the sign-in page.
-      router.push("/onboarding");
-    }
-    else if (token && inAuthGroup && user) {
+      router.replace("/onboarding");
+    } else if (token && inAuthGroup && user) {
       // Redirect away from the sign-in page.
       router.replace("/");
     }
@@ -36,19 +33,16 @@ const useProtectedRoute = (user, token) => {
 };
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  let token = getValueFor("token");
+  // const [user, setUser] = useState(null);
+  const user = useSelector(selectUser);
+  console.log(user);
 
-  console.log(token);
+  const token = getValueFor("token");
 
   useProtectedRoute(user, token);
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, signOut: () => setUser(null) }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
 }
 

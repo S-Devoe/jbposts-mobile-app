@@ -6,10 +6,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "expo": "^48.0.7",
     "expo-checkbox": "^2.3.1",
     "expo-constants": "~14.2.1",
-    "expo-font": "^11.1.1",
+    "expo-font": "~11.1.1",
     "expo-linking": "~4.0.1",
     "expo-router": "^1.2.0",
     "expo-secure-store": "^12.1.1",
@@ -26,7 +27,9 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "^13.9.0",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-web": "~0.18.7"
+    "react-native-web": "~0.18.7",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

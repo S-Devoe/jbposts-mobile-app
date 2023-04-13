@@ -26,7 +26,6 @@ const SignUp = () => {
   const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
   const onSubmit = async (data) => {
-    console.log(data);
     await SecureStore.setItemAsync("token", "A12b4");
 
     setUser({

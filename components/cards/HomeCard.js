@@ -2,10 +2,13 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLORS, FONT, SIZES } from "../../styles/theme";
 import BookmarkIcon from "../Icons/BookmarkIcon";
 import Img from "../../assets/images/apple-logo.png";
+import { useRouter } from "expo-router";
 
 const HomeCard = ({ item }) => {
+  const router = useRouter();
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={item.id}>
       <View
         style={{
           flexDirection: "row",
@@ -15,12 +18,12 @@ const HomeCard = ({ item }) => {
       >
         <View style={styles.alignImageText}>
           <Image
-            source={{ uri: item.image }}
+            source={item.image}
             style={{ width: 30, height: 30 }}
             resizeMode="cover"
           />
           <View>
-            <Text style={styles.headerText}>{item?.position}</Text>
+            <Text style={styles.headerText}>{item?.job_title}</Text>
             <View style={styles.info}>
               <Text>{item?.name}</Text>
               <Text>.</Text>
@@ -57,8 +60,9 @@ const HomeCard = ({ item }) => {
               gap: 8,
             }}
           >
-            {item?.job_terms.map((value) => (
+            {item?.job_terms.map((value, index) => (
               <View
+                key={index}
                 style={{
                   backgroundColor: "rgba(203, 201, 212, .2)",
                   blurRadius: 10,
@@ -73,6 +77,7 @@ const HomeCard = ({ item }) => {
           </View>
 
           <TouchableOpacity
+            onPress={() => router.push(`jobs/${item?.id}`)}
             style={{
               backgroundColor: "rgba(255, 107, 44, .2)",
               paddingVertical: 6,

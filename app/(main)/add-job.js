@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native'
+import { SafeAreaView } from "react-native";
+import { View, Text } from "react-native";
 const AddJob = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>AddJob</Text>
-    </View>
-  )
-}
-export default AddJob
+    </SafeAreaView>
+  );
+};
+export default AddJob;

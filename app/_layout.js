@@ -1,56 +1,34 @@
-import { Stack, Slot } from "expo-router";
+import { Stack } from "expo-router";
 import { View, Text } from "react-native";
 import { AuthProvider, useAuth } from "../hooks/AuthContext";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useCallback } from "react";
+import { Provider } from "react-redux";
+import store from "../redux/store";
+import SplashScreen from "../components/SplashScreen";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const Layout = () => {
-  const fontsLoaded = useFonts({
+  const [fontsLoaded] = useFonts({
     DMBold: require("../assets/fonts/DMSans-Bold.ttf"),
     DMMedium: require("../assets/fonts/DMSans-Medium.ttf"),
     DMRegular: require("../assets/fonts/DMSans-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
-
   return (
-    <>
-      {!fontsLoaded && <SplashScreen />}
-      {fontsLoaded && <RootLayoutNav onLayoutRootView={onLayoutRootView} />}
-    </>
+    <Provider store={store}>
+      {!fontsLoaded ? (
+        <SplashScreen />
+      ) : (
+        <AuthProvider>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          />
+        </AuthProvider>
+      )}
+    </Provider>
   );
 };
 export default Layout;
-
-function RootLayoutNav(onLayoutRootView) {
-  return (
-    <>
-      <AuthProvider>
-        <Stack
-          onLayout={onLayoutRootView}
-          screenOptions={{
-            headerShown: false,
-          }}
-        />
-      </AuthProvider>
-    </>
-  );
-}
-
-export const unstable_settings = {
-  // Used for `(auth)`
-  initialRouteName: "onboarding",
-  // Used for `(main)`
-  main: {
-    initialRouteName: "index",
-  },
-};
